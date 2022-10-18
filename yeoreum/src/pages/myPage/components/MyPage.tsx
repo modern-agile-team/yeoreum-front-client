@@ -9,9 +9,9 @@ function MyPage() {
     <Wrapper>
       <RightContainer>
         <Title>Profile</Title>
-        <OuterBoxStyle size={['504px', '296px']} shadow={5}><MyProfile /></OuterBoxStyle>
+        <OuterBoxStyle size={['545px', '396px']} shadow={5}><MyProfile /></OuterBoxStyle>
         <Title>My Post</Title>
-        <OuterBox size={['504px', '226px']} shadow={5}><MyPost /></OuterBox>
+        <OuterBox size={['545px', '135px']} shadow={5}><MyPost /></OuterBox>
       </RightContainer> 
       <Container>
         <Title>My List</Title>

@@ -7,14 +7,13 @@ export const Wrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
 `;
 
 export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 147px;
+  margin-left: 117px;
 `;
 
 export const Title = styled.div`
@@ -28,7 +27,7 @@ export const OuterBoxStyle = styled(OuterBox)`
 `;
 
 export const Container = styled.div`
-  margin-left: 95px;
+  margin-left: 90px;
 `;
 export const InnerBoxStyle = styled(InnerBox)`
   position: relative;
