@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 222px;
+  width: 160px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,6 @@ export const Logo = styled.div`
 `;
 
 export const Main = styled.div`
-  /* display: flex; */
 `;
 
 export const IconStyle = styled(FontAwesomeIcon)`
