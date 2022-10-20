@@ -1,12 +1,13 @@
-import {Wrapper, Ballon, Container, Manner, Color} from '../../styles/Graph'
+import {Wrapper, Ballon, Container, Manner, ColorGraph} from '../../styles/Graph'
 
 function Graph() {
   return (
     <Wrapper>
-      <Ballon>23%</Ballon>
       <Container>
       <Manner>
-        <Color />
+        <ColorGraph>
+      <Ballon>23%</Ballon>
+        </ColorGraph>
       </Manner>
       </Container>
     </Wrapper>

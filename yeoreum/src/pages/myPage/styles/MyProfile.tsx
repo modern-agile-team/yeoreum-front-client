@@ -20,10 +20,14 @@ export const InnerBoxStyle = styled(InnerBox)`
 export const Manner = styled.div`
   width: 176px;
   height: 10px;
-  /* margin-top: 90px; */
   margin-left: 19px;
   background: #E6E6EE;
   box-shadow: 5px 5px 6px rgba(63, 63, 143, 0.25), -5px -5px 6px #FFFFFF;
   border-radius: 50px;
 `
-
+export const Image = styled.div`
+  width: 100%;
+  height: 100%;
+  /* background: url("images/profile.png") center/cover; */
+  border-radius: 10px;
+`
