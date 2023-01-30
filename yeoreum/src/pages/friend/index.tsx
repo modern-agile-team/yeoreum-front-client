@@ -1,15 +1,15 @@
 import React from 'react';
 import PostContainer from '../../components/board/PostContainer';
-import PostPageTitle from '../../components/board/PostPageTitle';
-import FriendPage from '../../components/friend/FriendPage';
+import MyFriendsList from '../../components/friend/MyFriendsList';
+import FriendTop from '../../components/friend/FriendTop';
 import UserSearch from '../../components/friend/UserSearch';
 
 function index() {
   return (
     <PostContainer>
-      <PostPageTitle title="친구" />
+      <FriendTop />
       <UserSearch />
-      <FriendPage />
+      <MyFriendsList />
     </PostContainer>
   );
 }

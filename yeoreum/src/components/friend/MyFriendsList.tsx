@@ -17,7 +17,7 @@ function FriendPage() {
         profileImage: '',
         nickname: '제주조랑말',
         description:
-          '안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요안녕하ㅔ요',
+          '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
       },
     },
     {
@@ -37,16 +37,23 @@ function FriendPage() {
       },
     },
   ];
+
+  const descriptionSlice = (string: string) => {
+    if (string.length <= 65) return string;
+    else return string.slice(0, 65) + '...';
+  };
+
   return (
     <div>
-      {/* <Input /> */}
       {임시list.map(item => {
         return (
           <List>
             <ProfileImg />
             <Info>
               <Nickname>{item.createrData.nickname}</Nickname>
-              <Description>{item.createrData.description}</Description>
+              <Description>
+                {descriptionSlice(item.createrData.description)}
+              </Description>
             </Info>
           </List>
         );
@@ -57,27 +64,18 @@ function FriendPage() {
 
 export default FriendPage;
 
-const Input = styled.input`
-  width: 100%;
-  height: 40px;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  background-color: #f8f9fa;
-`;
-
 const List = styled.div`
-  /* background-color: aliceblue; */
+  display: flex;
+  align-items: center;
   max-width: 600px;
-  min-height: 70px;
   padding: 8px 20px 10px;
   border-bottom: 1px solid #bbb;
-  display: flex;
   cursor: pointer;
 `;
 
 const ProfileImg = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 63px;
+  height: 63px;
   margin-right: 15px;
   border-radius: 50%;
   background-color: antiquewhite;
@@ -95,4 +93,6 @@ const Nickname = styled.div`
 
 const Description = styled.div`
   font-size: 14px;
+  letter-spacing: 0.6px;
+  line-height: 20px;
 `;
