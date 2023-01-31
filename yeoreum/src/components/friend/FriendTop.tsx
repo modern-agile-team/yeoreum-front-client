@@ -1,19 +1,32 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import PostPageTitle from '../board/PostPageTitle';
+import Modal from '../common/Modal';
+import AddFriendModal from './AddFriendModal';
 
 function FriendTop() {
+  const [isOpen3, setIsOpen3] = useState(false);
+
+  const AddFriend = () => {
+    setIsOpen3(true);
+  };
+
   return (
-    <Div>
+    <Container>
       <PostPageTitle title="친구" />
-      <AddIcon />
-    </Div>
+      <AddIcon onClick={AddFriend} />
+      {isOpen3 && (
+        <Modal onClose={() => setIsOpen3(false)}>
+          <AddFriendModal />
+        </Modal>
+      )}
+    </Container>
   );
 }
 
 export default FriendTop;
 
-const Div = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,4 +38,6 @@ const AddIcon = styled.div`
   margin-bottom: 20px;
   margin-left: 10px;
   background-color: antiquewhite;
+
+  cursor: pointer;
 `;
