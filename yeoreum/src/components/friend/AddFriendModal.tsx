@@ -23,7 +23,7 @@ function AddFriendModal() {
           </Items>
         </Added>
       )}
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '0 10px' }}>
         <AddModalSearch />
       </div>
       <Div>
@@ -53,8 +53,8 @@ const ArrowIcons = styled.div`
 
 const Added = styled.div`
   display: flex;
-  width: 350px;
-  padding: 10px 0;
+  width: 360px;
+  padding: 10px;
   overflow-x: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -66,7 +66,7 @@ const Items = styled.div`
   margin-right: 13px;
 `;
 
-const Delete = styled.div`
+const Delete = styled.button`
   position: absolute;
   top: -10px;
   right: 0;
@@ -77,6 +77,8 @@ const Delete = styled.div`
   justify-content: center;
   border-radius: 50%;
   background-color: aqua;
+
+  cursor: pointer;
 `;
 
 const Item = styled.div`
