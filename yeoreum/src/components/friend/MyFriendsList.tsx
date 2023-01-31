@@ -69,7 +69,6 @@ const List = styled.div`
   align-items: center;
   max-width: 600px;
   padding: 8px 20px 10px;
-  border-bottom: 1px solid #bbb;
   cursor: pointer;
 `;
 
