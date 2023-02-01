@@ -2,6 +2,12 @@ import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import AddModalSearch from './AddModalSearch';
 
+interface FriendType {
+  id: number;
+  img: string;
+  nickname: string;
+}
+
 function AddFriendModal() {
   const 임시lists = [
     {
@@ -27,18 +33,33 @@ function AddFriendModal() {
       </div>
       <Div>
         {임시lists.map(item => {
-          return (
-            <AllUsersList key={item.id}>
-              <ProfileImg>{item.img}</ProfileImg>
-              <Nickname>{item.nickname}</Nickname>
-              <ApplicationButton>신청</ApplicationButton>
-            </AllUsersList>
-          );
+          return <ListItem item={item} />;
         })}
       </Div>
     </Container>
   );
 }
+
+interface ItemProps {
+  item: FriendType;
+}
+
+const ListItem = ({ item }: ItemProps) => {
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  return (
+    <AllUsersList key={item.id}>
+      <ProfileImg>{item.img}</ProfileImg>
+      <Nickname>{item.nickname}</Nickname>
+      <ApplicationButton
+        disabled={isDisabled}
+        onClick={() => setIsDisabled(true)}
+      >
+        신청
+      </ApplicationButton>
+    </AllUsersList>
+  );
+};
 
 export default AddFriendModal;
 
@@ -105,12 +126,28 @@ const Nickname = styled.div`
   font-size: 14px;
 `;
 
-const ApplicationButton = styled.button`
+const ApplicationButton = styled.button<{ disabled: boolean }>`
   width: 58px;
   height: 30px;
   border-radius: 8px;
   color: white;
-  background-color: #4caf50;
+  background-color: #626ece;
 
   cursor: pointer;
+  ${({ disabled }) =>
+    disabled
+      ? `&:disabled {
+    background: #b8c7e7;
+    cursor: default;
+  }`
+      : ''};
+`;
+
+const ClickButton = styled.button`
+  width: 58px;
+  height: 30px;
+  border-radius: 8px;
+  color: white;
+  background: #b8c7e7;
+  cursor: default;
 `;
