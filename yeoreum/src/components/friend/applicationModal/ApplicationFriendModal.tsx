@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
 import React from 'react';
+import styled from '@emotion/styled';
 import AllUserList from './AllUserList';
 import AllUserSearch from './AllUserSearch';
 
@@ -12,20 +12,16 @@ function ApplicationFriendModal() {
     },
     {
       userNo: 2,
-      profileImage: '제주조랑말제주조랑말제주조랑말',
-      nickname: '',
+      profileImage: '',
+      nickname: '제주조랑말제주조랑말제주조랑말',
     },
   ];
 
   return (
     <Container>
-      <ArrowIcons>
-        <Before />
-        <Next />
-      </ArrowIcons>
-      <div style={{ padding: '0 10px' }}>
+      <SearchWrapper>
         <AllUserSearch />
-      </div>
+      </SearchWrapper>
       <ListWrapper>
         {users.map(item => {
           return <AllUserList item={item} />;
@@ -38,28 +34,12 @@ function ApplicationFriendModal() {
 export default ApplicationFriendModal;
 
 const Container = styled.div`
-  padding: 10px;
+  padding: 20px 10px;
 `;
 
-const ArrowIcons = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+const SearchWrapper = styled.div`
+  padding: 0 10px;
 `;
-
-const Before = styled.div`
-  width: 20px;
-  height: 10px;
-  background-color: aliceblue;
-`;
-
-const Next = styled.div`
-  width: 20px;
-  height: 10px;
-  background-color: aliceblue;
-`;
-
 const ListWrapper = styled.div`
   height: 330px;
   overflow: auto;
