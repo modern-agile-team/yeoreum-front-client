@@ -2,11 +2,65 @@ import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import AddModalSearch from './AddModalSearch';
 
+interface FriendType {
+  id: number;
+  img: string;
+  nickname: string;
+}
+
 function AddFriendModal() {
+  const [checkedList, setCheckedList] = useState<FriendType[]>([]);
+  const [isChecked, setIsChecked] = useState(false);
   const [upProfile, setUpProfile] = useState(false);
 
-  const AddFriend = () => {
+  const 임시lists = [
+    {
+      id: 1,
+      img: '',
+      nickname: '제주조랑말',
+    },
+    {
+      id: 2,
+      img: '',
+      nickname: '제주조랑말제주조랑말제주조랑말',
+    },
+    {
+      id: 3,
+      img: '',
+      nickname: '제주조랑말제주조랑말제주조랑말s',
+    },
+  ];
+
+  const showProfile = () => {
     setUpProfile(true);
+  };
+
+  const checkedItemHandler = (value: FriendType, isChecked: boolean) => {
+    if (isChecked) {
+      setCheckedList(prev => [...prev, value]);
+
+      return;
+    }
+
+    if (!isChecked && checkedList.includes(value)) {
+      setCheckedList(checkedList.filter(item => item !== value));
+
+      return;
+    }
+
+    return;
+  };
+
+  const checkHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    value: FriendType,
+  ) => {
+    setIsChecked(!isChecked);
+    checkedItemHandler(value, e.target.checked);
+    // setUpProfile(true);
+    showProfile();
+
+    console.log(value, e.target.checked);
   };
 
   return (
@@ -27,11 +81,19 @@ function AddFriendModal() {
         <AddModalSearch />
       </div>
       <Div>
-        <AllUsersList>
-          <ProfileImg />
-          <Nickname>제주조랑말제주조랑말제주조랑말d</Nickname>
-          <Checked onClick={AddFriend}></Checked>
-        </AllUsersList>
+        {임시lists.map(item => {
+          return (
+            <AllUsersList key={item.id}>
+              <ProfileImg>{item.img}</ProfileImg>
+              <Nickname>{item.nickname}</Nickname>
+              <Checkbox
+                type="checkbox"
+                // checked={임시lists.includes(item)}
+                onChange={e => checkHandler(e, item)}
+              />
+            </AllUsersList>
+          );
+        })}
       </Div>
     </Container>
   );
@@ -140,9 +202,6 @@ const Nickname = styled.div`
   font-size: 14px;
 `;
 
-const Checked = styled.div`
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px solid red;
-`;
+const Checked = styled.div``;
+
+const Checkbox = styled.input``;
