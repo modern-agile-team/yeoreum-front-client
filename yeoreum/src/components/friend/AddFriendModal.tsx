@@ -2,17 +2,7 @@ import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import AddModalSearch from './AddModalSearch';
 
-interface FriendType {
-  id: number;
-  img: string;
-  nickname: string;
-}
-
 function AddFriendModal() {
-  const [checkedList, setCheckedList] = useState<FriendType[]>([]);
-  const [isChecked, setIsChecked] = useState(false);
-  const [upProfile, setUpProfile] = useState(false);
-
   const 임시lists = [
     {
       id: 1,
@@ -24,44 +14,7 @@ function AddFriendModal() {
       img: '',
       nickname: '제주조랑말제주조랑말제주조랑말',
     },
-    {
-      id: 3,
-      img: '',
-      nickname: '제주조랑말제주조랑말제주조랑말s',
-    },
   ];
-
-  const showProfile = () => {
-    setUpProfile(true);
-  };
-
-  const checkedItemHandler = (value: FriendType, isChecked: boolean) => {
-    if (isChecked) {
-      setCheckedList(prev => [...prev, value]);
-
-      return;
-    }
-
-    if (!isChecked && checkedList.includes(value)) {
-      setCheckedList(checkedList.filter(item => item !== value));
-
-      return;
-    }
-
-    return;
-  };
-
-  const checkHandler = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    value: FriendType,
-  ) => {
-    setIsChecked(!isChecked);
-    checkedItemHandler(value, e.target.checked);
-    // setUpProfile(true);
-    showProfile();
-
-    console.log(value, e.target.checked);
-  };
 
   return (
     <Container>
@@ -69,14 +22,6 @@ function AddFriendModal() {
         <Before />
         <Next />
       </ArrowIcons>
-      {upProfile && (
-        <Added>
-          <Items>
-            <Delete>x</Delete>
-            <Item />
-          </Items>
-        </Added>
-      )}
       <div style={{ padding: '0 10px' }}>
         <AddModalSearch />
       </div>
@@ -86,11 +31,7 @@ function AddFriendModal() {
             <AllUsersList key={item.id}>
               <ProfileImg>{item.img}</ProfileImg>
               <Nickname>{item.nickname}</Nickname>
-              <Checkbox
-                type="checkbox"
-                // checked={임시lists.includes(item)}
-                onChange={e => checkHandler(e, item)}
-              />
+              <ApplicationButton>신청</ApplicationButton>
             </AllUsersList>
           );
         })}
@@ -102,7 +43,6 @@ function AddFriendModal() {
 export default AddFriendModal;
 
 const Container = styled.div`
-  height: 530px;
   padding: 10px;
 `;
 
@@ -111,44 +51,6 @@ const ArrowIcons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
-`;
-
-const Added = styled.div`
-  display: flex;
-  width: 360px;
-  padding: 10px;
-  overflow-x: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const Items = styled.div`
-  position: relative;
-  margin-right: 13px;
-`;
-
-const Delete = styled.button`
-  position: absolute;
-  top: -10px;
-  right: 0;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: aqua;
-
-  cursor: pointer;
-`;
-
-const Item = styled.div`
-  width: 36px;
-  height: 36px;
-  margin-bottom: 15px;
-  border-radius: 50%;
-  background-color: #3d4954;
 `;
 
 const Before = styled.div`
@@ -176,9 +78,9 @@ const Div = styled.div`
     background: #217af4;
     border-radius: 10px;
   }
-  ::-webkit-scrollbar-track {
+  /* ::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, 0.1);
-  }
+  } */
 `;
 
 const AllUsersList = styled.div`
@@ -199,9 +101,16 @@ const ProfileImg = styled.div`
 
 const Nickname = styled.div`
   width: 250px;
+  margin-left: 10px;
   font-size: 14px;
 `;
 
-const Checked = styled.div``;
+const ApplicationButton = styled.button`
+  width: 58px;
+  height: 30px;
+  border-radius: 8px;
+  color: white;
+  background-color: #4caf50;
 
-const Checkbox = styled.input``;
+  cursor: pointer;
+`;
