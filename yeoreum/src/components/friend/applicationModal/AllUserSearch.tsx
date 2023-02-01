@@ -30,7 +30,7 @@ function AddModalSearch() {
 export default AddModalSearch;
 
 const InputBox = styled.div`
-  width: 350px;
+  width: 360px;
   height: 40px;
   display: flex;
   align-items: center;
