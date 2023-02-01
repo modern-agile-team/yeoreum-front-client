@@ -2,39 +2,20 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 function FriendPage() {
-  const 임시list = [
+  const friendList = [
     {
-      userNo: 1,
-      createrData: {
-        profileImage: '',
-        nickname: '무친저글링',
-        description: 'dsdsdsds',
-      },
+      friendUserNo: 1,
+      friendNickname: '무친저글링',
+      friendImage: '',
+      friendDescription:
+        '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
     },
     {
-      userNo: 2,
-      createrData: {
-        profileImage: '',
-        nickname: '제주조랑말',
-        description:
-          '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
-      },
-    },
-    {
-      userNo: 3,
-      createrData: {
-        profileImage: '',
-        nickname: '까지발덩크',
-        description: 'dsdsdsdsㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
-      },
-    },
-    {
-      userNo: 4,
-      createrData: {
-        profileImage: '',
-        nickname: '무친저글링',
-        description: 'dsdsdsds',
-      },
+      friendUserNo: 2,
+      friendNickname: '무친저글링무친저글링',
+      friendImage: '',
+      friendDescription:
+        '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
     },
   ];
 
@@ -45,14 +26,14 @@ function FriendPage() {
 
   return (
     <div>
-      {임시list.map((item, idx) => {
+      {friendList.map((item, idx) => {
         return (
           <List key={idx}>
             <ProfileImg />
             <Info>
-              <Nickname>{item.createrData.nickname}</Nickname>
+              <Nickname>{item.friendNickname}</Nickname>
               <Description>
-                {descriptionSlice(item.createrData.description)}
+                {descriptionSlice(item.friendDescription)}
               </Description>
             </Info>
           </List>
