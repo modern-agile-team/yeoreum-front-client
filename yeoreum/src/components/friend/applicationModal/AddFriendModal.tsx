@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
-import AddModalSearch from './AddModalSearch';
+import AllUserSearch from './AllUserSearch';
 
 interface FriendType {
   id: number;
@@ -8,7 +8,7 @@ interface FriendType {
   nickname: string;
 }
 
-function AddFriendModal() {
+function ApplicationFriendModal() {
   const 임시lists = [
     {
       id: 1,
@@ -29,7 +29,7 @@ function AddFriendModal() {
         <Next />
       </ArrowIcons>
       <div style={{ padding: '0 10px' }}>
-        <AddModalSearch />
+        <AllUserSearch />
       </div>
       <Div>
         {임시lists.map(item => {
@@ -61,7 +61,7 @@ const ListItem = ({ item }: ItemProps) => {
   );
 };
 
-export default AddFriendModal;
+export default ApplicationFriendModal;
 
 const Container = styled.div`
   padding: 10px;

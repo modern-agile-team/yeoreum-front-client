@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
-import PostPageTitle from '../board/PostPageTitle';
-import Modal from '../common/Modal';
-import AddFriendModal from './AddFriendModal';
+import PostPageTitle from '../../board/PostPageTitle';
+import Modal from '../../common/Modal';
+import AddFriendModal from '../applicationModal/AddFriendModal';
 
 function FriendTop() {
   const [isOpen3, setIsOpen3] = useState(false);

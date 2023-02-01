@@ -45,9 +45,9 @@ function FriendPage() {
 
   return (
     <div>
-      {임시list.map(item => {
+      {임시list.map((item, idx) => {
         return (
-          <List>
+          <List key={idx}>
             <ProfileImg />
             <Info>
               <Nickname>{item.createrData.nickname}</Nickname>
