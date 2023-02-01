@@ -1,18 +1,15 @@
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import React from 'react';
+import ElseProfile from '../../elseProfile/ElseProfile';
+import Modal from '../../common/Modal';
 
 function FriendPage() {
+  const [isOpen4, setIsOpen4] = useState(false);
+
   const friendList = [
     {
       friendUserNo: 1,
       friendNickname: '무친저글링',
-      friendImage: '',
-      friendDescription:
-        '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
-    },
-    {
-      friendUserNo: 2,
-      friendNickname: '무친저글링무친저글링',
       friendImage: '',
       friendDescription:
         '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
@@ -24,13 +21,22 @@ function FriendPage() {
     else return string.slice(0, 65) + '...';
   };
 
+  const openProfileHandler = () => {
+    setIsOpen4(true);
+  };
+
   return (
     <div>
       {friendList.map((item, idx) => {
         return (
           <List key={idx}>
             <ProfileImg />
-            <Info>
+            <Info onClick={openProfileHandler}>
+              {isOpen4 && (
+                <Modal onClose={() => setIsOpen4(false)}>
+                  <ElseProfile />
+                </Modal>
+              )}
               <Nickname>{item.friendNickname}</Nickname>
               <Description>
                 {descriptionSlice(item.friendDescription)}
