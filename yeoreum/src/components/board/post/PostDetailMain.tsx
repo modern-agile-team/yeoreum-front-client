@@ -66,7 +66,7 @@ function PostDetailMain({ postNo }: PostDetailMainProps) {
             <WriterTag>작성자</WriterTag>
           </Member>
           {postData?.hostMemberNicknames.map((nickname: string) => {
-            if (postData.nickname === nickname) return;
+            if (postData.hostNickname === nickname) return;
             return (
               <Member>
                 <MemberProfile src="/anonymous.png" />

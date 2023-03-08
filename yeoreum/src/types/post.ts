@@ -7,10 +7,10 @@ export interface PostType {
   location: string;
   meetingTime: string;
   isDone: boolean;
-  male: number;
-  female: number;
-  hostUserNums: number[];
-  hostNicknames: string[];
+  recruitMale: number;
+  recruitFemale: number;
+  hostMemberNums: number[];
+  hostMemberNicknames: string[];
 }
 
 export interface BoardType {
@@ -39,6 +39,16 @@ export interface PostCreateData {
   recruitMale: number;
   recruitFemale: number;
   hostMembers: UserNo[];
+}
+
+export interface PostEditData {
+  [key: string]: any;
+  title: string;
+  description: string;
+  location: string;
+  meetingTime: string;
+  recruitMale: number;
+  recruitFemale: number;
 }
 
 export interface ApplicationCreateData {
