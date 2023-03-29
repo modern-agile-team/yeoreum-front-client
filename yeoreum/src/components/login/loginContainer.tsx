@@ -11,6 +11,7 @@ const LoginContainer = ({ children }: Props) => (
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
   background: #fff;
   max-width: 680px;
   min-height: calc(90vh - 180px);
@@ -18,9 +19,10 @@ const Container = styled.div`
   color: #555555;
   @media (max-width: 679px) {
     margin: 0;
-    & > div:first-child {
+    /* 배너 있을 경우 주석 풀기
+     & > div:first-child {
       display: none;
-    }
+    }  */
 
     & > div:last-child {
       margin: 0;

@@ -8,7 +8,7 @@ import Footer from '../../components/login/footer';
 
 const Login = () => (
   <LoginContainer>
-    <Banner />
+    {/* <Banner /> */}
     <LoginBox>
       <Header />
       <LoginForm />
