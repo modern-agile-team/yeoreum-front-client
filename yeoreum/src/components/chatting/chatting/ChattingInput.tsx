@@ -2,6 +2,9 @@ import React, { useState, useCallback, FormEvent, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { ChatLogType } from '../../../types/chat';
 import { socket } from '../../../pages/_app';
+import ModalPortal from '../../modalPortal/ModalPortal';
+import Modal from '../../common/Modal';
+import PromiseModal from './PromiseModal';
 
 interface ChatsProps {
   setChats: React.Dispatch<React.SetStateAction<ChatLogType[]>>;
@@ -10,6 +13,7 @@ interface ChatsProps {
 
 function ChattingInput({ setChats, chatSocketData }: ChatsProps) {
   const [message, setMessage] = useState<string>('');
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const messageHandler = (chat: ChatLogType) =>
@@ -35,7 +39,6 @@ function ChattingInput({ setChats, chatSocketData }: ChatsProps) {
         { userNo: 21, message, chatRoomNo: chatSocketData?.chatRoomNo },
         ({ response }: any) => {
           const chats = response.messagePayload;
-
           setChats(prevChats => [...prevChats, chats]);
           setMessage('');
         },
@@ -44,24 +47,36 @@ function ChattingInput({ setChats, chatSocketData }: ChatsProps) {
     [message, setChats],
   );
 
+  const openPromiseHandler = () => {
+    setIsOpen(true);
+  };
+
   return (
     <MessageForm onSubmit={sendMessageHandler}>
-      <FileBox>
-        <Img src="/icons/paperclip.svg" />
-      </FileBox>
       <InputBox>
-        <Input
-          type="text"
-          onChange={inputChangeHandler}
-          value={message}
-          placeholder="Message"
-        />
+        <Input type="text" onChange={inputChangeHandler} value={message} />
       </InputBox>
-      <SendButtonBox>
+      <AttachWrapper>
+        <FileBox>
+          <Img className="file" src="/icons/paperclip.svg" />
+          <Img
+            className="promise"
+            src="/icons/clockBlack.svg"
+            onClick={openPromiseHandler}
+          />
+          {isOpen && (
+            <Modal onClose={() => setIsOpen(false)}>
+              <PromiseModal
+                setIsOpen={setIsOpen}
+                chatSocketData={chatSocketData}
+              />
+            </Modal>
+          )}
+        </FileBox>
         <SendButton>
-          <Img src="/icons/send.svg" />
+          <Img className="send" src="/icons/send.svg" />
         </SendButton>
-      </SendButtonBox>
+      </AttachWrapper>
     </MessageForm>
   );
 }
@@ -69,25 +84,13 @@ function ChattingInput({ setChats, chatSocketData }: ChatsProps) {
 export default ChattingInput;
 
 const MessageForm = styled.form`
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border-top: 1px solid ${({ theme }) => theme.palette.line.grey};
-`;
-
-const FileBox = styled.div`
-  margin-right: 10px;
-  padding: 0 20px;
-  border-right: 1px solid ${({ theme }) => theme.palette.line.grey};
-`;
-
-const Img = styled.img`
-  width: 20px;
 `;
 
 const InputBox = styled.div`
   width: 100%;
+  height: 60px;
+  padding: 5px 10px 0 10px;
 `;
 
 const Input = styled.input`
@@ -98,15 +101,30 @@ const Input = styled.input`
   }
 `;
 
-const SendButtonBox = styled.div`
-  height: 100%;
-  padding: 0 15px;
+const AttachWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  border-left: 1px solid ${({ theme }) => theme.palette.background.grey};
-  background-color: ${({ theme }) => theme.palette.background.white};
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const FileBox = styled.div``;
+
+const Img = styled.img`
+  width: 23px;
+  margin-bottom: 7px;
 
   cursor: pointer;
+  .file& {
+    margin-left: 10px;
+  }
+
+  .promise& {
+    margin-left: 10px;
+  }
+
+  .send& {
+    margin-right: 10px;
+  }
 `;
 
 const SendButton = styled.button`

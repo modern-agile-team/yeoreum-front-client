@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import ParticipantsList from './ParticipantsList';
 import ChatList from './ChatList';
 import { ChatRoom } from '../../../types/chat';
+import { usePromiseInquiry } from '../../../hooks/queries/promise';
 
 interface ChatDataProps {
   chatData: ChatRoom[];
@@ -16,6 +17,9 @@ function ChattingListBox({
   chatSocketData,
 }: ChatDataProps) {
   const [viewList, setViewList] = useState(0);
+
+  const { data } = usePromiseInquiry(chatSocketData?.chatRoomNo);
+  const promiseInfo = data?.data.response.meeting;
 
   const tabs = [
     {
@@ -53,13 +57,26 @@ function ChattingListBox({
           </SelectButton>
         ))}
       </ButtonBox>
-      <ListsBox>
-        {tabs
-          .filter(tab => viewList === tab.id)
-          .map(tab => (
-            <ListItem key={tab.id}>{tab.content}</ListItem>
-          ))}
-      </ListsBox>
+      <ListWrapper>
+        <ListBox>
+          {tabs
+            .filter(tab => viewList === tab.id)
+            .map(tab => (
+              <ListItem key={tab.id}>{tab.content}</ListItem>
+            ))}
+        </ListBox>
+        <PromiseWrapper>
+          <PromiseTitle>약속</PromiseTitle>
+          <PromiseBox>
+            <PromiseRow>장소:</PromiseRow>
+            <PromiseColumn>{promiseInfo?.location}</PromiseColumn>
+          </PromiseBox>
+          <PromiseBox>
+            <PromiseRow>시간:</PromiseRow>
+            <PromiseColumn>{promiseInfo?.time}</PromiseColumn>
+          </PromiseBox>
+        </PromiseWrapper>
+      </ListWrapper>
     </Container>
   );
 }
@@ -83,7 +100,7 @@ const ButtonBox = styled.div`
 `;
 
 const SelectButton = styled.button`
-  width: 90px;
+  padding: 0 10px;
   height: 100%;
   margin: 0;
   border: none;
@@ -98,10 +115,15 @@ const SelectButton = styled.button`
   }
 `;
 
-const ListsBox = styled.div`
+const ListWrapper = styled.div`
+  width: 100%;
   height: calc(100% - 60px);
-  overflow: auto;
+`;
 
+const ListBox = styled.div`
+  width: 100%;
+  height: 510px;
+  overflow: auto;
   ::-webkit-scrollbar {
     width: 0px;
   }
@@ -110,3 +132,25 @@ const ListsBox = styled.div`
 const ListItem = styled.div`
   cursor: pointer;
 `;
+
+const PromiseWrapper = styled.div`
+  width: 100%;
+`;
+
+const PromiseTitle = styled.span`
+  margin: 0 0 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.palette.font.headline};
+`;
+
+const PromiseBox = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+
+const PromiseRow = styled.span`
+  margin-right: 5px;
+`;
+
+const PromiseColumn = styled.span``;
