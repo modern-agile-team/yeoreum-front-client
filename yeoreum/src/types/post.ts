@@ -27,6 +27,15 @@ export interface BoardType {
   recruitFemale: number;
   title: string;
   teamNo?: number;
+  isAdoptedStatus?: 2 | 3 | 4;
+}
+
+export interface ApplicationType {
+  title: string;
+  description: string;
+  guests: number[];
+  isAdoptedStatus: 2 | 3 | 4;
+  teamNo: number;
 }
 
 export interface PostCreateData {
