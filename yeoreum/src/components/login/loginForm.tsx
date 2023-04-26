@@ -1,17 +1,58 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import axios from 'axios';
 import Link from 'next/link';
+import { useLoginMutation } from '../../hooks/queries/auth/login';
+import hashPassword from '../../utils/hashPassword';
 
 const loginForm = () => {
-  // axios.get('/api/auth/kakao/login');
+  const router = useRouter();
+  const [user, setUser] = useState({ email: '', password: '' });
+  const loginMutation = useLoginMutation(
+    data => {
+      const token = data.response.user.accessToken;
+      alert(data.msg);
+      localStorage.setItem('token', token);
+      router.replace('/');
+    },
+    (error: any) => {
+      const msg = error.response.data.message;
+      alert(msg);
+    },
+  );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser(prevUser => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const password = hashPassword(user.password);
+    loginMutation.mutate({ email: user.email, password });
+  };
+
   return (
     <>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Label>
-          <Input type="email" placeholder="email" />
+          <Input
+            onChange={handleInputChange}
+            type="email"
+            name="email"
+            placeholder="email"
+          />
         </Label>
         <Label>
-          <Input type="password" placeholder="password" />
+          <Input
+            onChange={handleInputChange}
+            type="password"
+            name="password"
+            placeholder="password"
+          />
         </Label>
         <Link href="">
           <ForgotPw>Forgot Password</ForgotPw>

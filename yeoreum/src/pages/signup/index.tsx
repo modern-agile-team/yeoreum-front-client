@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import SignUpContainer from '../../components/signUp/signUpContainer';
+import SignUpContainer from '../../components/signUp/SignUpContainer';
 import SignUpBody from '../../components/signUp/SignUpBody';
-import SignUpHeader from '../../components/signUp/signUpHeader';
-import SignUpForm from '../../components/signUp/SignUpForm';
+import SignUpHeader from '../../components/signUp/SignUpHeader';
 import SignUpBodyIndex from '../../components/signUp/SignUpBodyIndex';
-import SignUpProfileForm from '../../components/signUp/SignUpProfileForm';
-import SignUpCertificate from '../../components/signUp/SignUpCertificate';
 
 const SignUp = () => {
   return (

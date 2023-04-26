@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Footer = () => (
   <Container>
     <SignUpText>Don't have an account yet?</SignUpText>
-    <Link href=""> Sign Up </Link>
+    <Link href="/signup"> Sign Up </Link>
   </Container>
 );
 
