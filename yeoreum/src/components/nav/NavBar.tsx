@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Alarm from '../alarm/Alarm';
 import UserModal from '../userModal/UserModal';
@@ -21,20 +22,20 @@ export function NavUsual({
   setHamburger,
 }: NavProps) {
   const { isLoggedIn } = useLoginState();
+  const router = useRouter();
+  // const onSuccess = (data: AxiosResponse<any, any>) => {
+  //   const token = data.data.response.user.accessToken;
+  //   localStorage.setItem('token', token);
+  //   alert('로그인 완료');
+  //   window.location.reload();
+  // };
 
-  const onSuccess = (data: AxiosResponse<any, any>) => {
-    const token = data.data.response.user.accessToken;
-    localStorage.setItem('token', token);
-    alert('로그인 완료');
-    window.location.reload();
-  };
+  // const onError = (error: any) => {
+  //   console.log(error);
+  //   alert('로그인 에러');
+  // };
 
-  const onError = (error: any) => {
-    console.log(error);
-    alert('로그인 에러');
-  };
-
-  const { mutate: login } = useLoginMutation(onSuccess, onError);
+  // const { mutate: login } = useLoginMutation(onSuccess, onError);
 
   const menuDataByPage = isServicePage ? menuDataService : menuDataUsual;
 
@@ -94,7 +95,9 @@ export function NavUsual({
               <UserModal />
             </ArrangeContainer>
           ) : (
-            <LoginButton onClick={() => login()}>로그인</LoginButton>
+            <LoginButton onClick={() => router.push('/login')}>
+              로그인
+            </LoginButton>
           )}
           <HamburgerButton onClick={() => setHamburger?.(true)}>
             <Image

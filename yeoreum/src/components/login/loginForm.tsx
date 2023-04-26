@@ -13,7 +13,7 @@ const loginForm = () => {
       const token = data.response.user.accessToken;
       alert(data.msg);
       localStorage.setItem('token', token);
-      router.push('/');
+      router.replace('/');
     },
     (error: any) => {
       const msg = error.response.data.message;
