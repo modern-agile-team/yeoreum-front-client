@@ -1,7 +1,7 @@
 <div>
   <h1>♥Yeoreum  Front-end</h1></div>
-  <ul>코로나로 인해 교류가 없던 재학생들을 위한 과팅 플랫폼입니다
-</ul>
+  코로나로 인해 교류가 없던 재학생들을 위한 과팅 플랫폼입니다
+  
   
 <br><br>
   
@@ -32,6 +32,7 @@
       <a href="https://github.com/kimsoo0119"><img src="https://img.shields.io/badge/개인%20깃허브-181717?style=flat-square&logo=Github"/></a>
       <li>김민호</li>
       <a href="https://github.com/klaus9267"><img src="https://img.shields.io/badge/개인%20깃허브-181717?style=flat-square&logo=Github"/></a>
+ 
    </ul>
 
   <br><br>
@@ -45,7 +46,7 @@
       <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>
       <img src="https://img.shields.io/badge/Styled%20Components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
       <img src="https://img.shields.io/badge/Emotion-F01F7A?style=flat-square"/>
-
+      </br>
       <h3>Back-end</h3>
       <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
       <img src="https://img.shields.io/badge/Nest.js-E0234E?style=flat&logo=NestJS&logoColor=white"/>
@@ -54,18 +55,18 @@
       <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=black"/>
       <img src="https://img.shields.io/badge/JSON%20Web%20Tokens-000000?style=flat-square&logo=jsonwebtokens&logoColor=white"/>
       <img src="https://img.shields.io/badge/Socket.io-010101?style=flat-square&logo=socketdotio&logoColor=white"/>
-
+      </br>
       <h3>Cloud</h3>
       <img src="https://img.shields.io/badge/AmazonEC2-FF9900?style=flat-square&logo=AmazonEC2&logoColor=white"/>
       <img src="https://img.shields.io/badge/AmazonS3-569A31?style=flat-square&logo=AmazonS3&logoColor=white"/>
       <img src="https://img.shields.io/badge/AmazonRDS-527FFF?style=flat-square&logo=AmazonRDS&logoColor=white"/>
-
+      </br>
       <h3>CI/CD</h3>
       <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white"/>
       <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=GitHubActions&logoColor=white"/>
     </ul>
   </div>
-  
+
   <br><br>
   
   <div>
