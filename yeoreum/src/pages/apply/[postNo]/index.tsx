@@ -13,6 +13,20 @@ interface ApplyStatusProps {
 function ApplyStatus({ postNo }: ApplyStatusProps) {
   const { data } = useApplicationList(postNo);
   const applicationList = data?.data.response.guestTeamMetaData.guestTeams;
+  const acceptedGuestTeamNo =
+    data?.data.response.guestTeamMetaData.acceptedGuestTeamNo;
+
+  applicationList?.forEach((guestTeam: any) => {
+    if (!acceptedGuestTeamNo) {
+      guestTeam.isAdoptedStatus = 2;
+      return;
+    }
+    if (guestTeam.teamNo === acceptedGuestTeamNo) {
+      guestTeam.isAdoptedStatus = 3;
+    } else guestTeam.isAdoptedStatus = 4;
+  });
+
+  console.log(applicationList);
 
   return (
     <PostContainer>

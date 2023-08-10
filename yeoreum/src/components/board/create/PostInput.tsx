@@ -1,13 +1,18 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { ApplicationCreateData, PostCreateData } from '../../../types/post';
+import {
+  ApplicationCreateData,
+  PostCreateData,
+  PostEditData,
+} from '../../../types/post';
 
 interface PostInputProps {
   keyName: string;
-  postData: PostCreateData | ApplicationCreateData;
+  postData: PostCreateData | ApplicationCreateData | PostEditData;
   setPostData:
     | React.Dispatch<React.SetStateAction<PostCreateData>>
-    | React.Dispatch<React.SetStateAction<ApplicationCreateData>>;
+    | React.Dispatch<React.SetStateAction<ApplicationCreateData>>
+    | React.Dispatch<React.SetStateAction<PostEditData>>;
   title: string;
   textarea?: boolean;
 }

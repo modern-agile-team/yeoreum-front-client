@@ -178,7 +178,7 @@ const FooterIcons = styled.ul`
 const FooterIcon = styled.li`
   width: 40px;
   height: 40px;
-  background-color: red;
+  background-color: lightgray;
   border-radius: 50%;
   margin-right: 20px;
 `;
