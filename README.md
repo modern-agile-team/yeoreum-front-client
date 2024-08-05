@@ -1,4 +1,6 @@
-<div>
+
+![Untitled](https://github.com/user-attachments/assets/55e0d5b7-91af-4f26-b7e4-3b92e83bd956)
+
   <h1>♥Yeoreum  Front-end</h1></div>
   코로나로 인해 교류가 없던 재학생들을 위한 과팅 플랫폼입니다
   
