@@ -1,5 +1,8 @@
-import axios from 'axios';
-import { ApplicationCreateData, PostCreateData } from '../types/post';
+import {
+  ApplicationCreateData,
+  PostCreateData,
+  PostEditData,
+} from '../types/post';
 import tokenAxios from './config';
 
 export interface RequestGetAllPostsOption {
@@ -28,6 +31,14 @@ const requestPostCreatePost = (body: PostCreateData) => {
   return tokenAxios.post('/boards', body);
 };
 
+const requestPatchEditPost = (boardNo: number, body: PostEditData) => {
+  return tokenAxios.patch(`/boards/${boardNo}`, body);
+};
+
+const requestDeletePost = (boardNo: number) => {
+  return tokenAxios.delete(`/boards/${boardNo}`);
+};
+
 const requestPostCreateApplication = (
   boardNo: number,
   body: ApplicationCreateData,
@@ -54,6 +65,8 @@ const requestPostCreateChatRoom = (boardNo: number, teamNo: number) => {
 export {
   requestGetPosts,
   requestPostCreatePost,
+  requestPatchEditPost,
+  requestDeletePost,
   requestPostCreateApplication,
   requestGetPostDetail,
   requestGetPostApplication,

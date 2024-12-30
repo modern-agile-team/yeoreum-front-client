@@ -65,15 +65,17 @@ function PostDetailMain({ postNo }: PostDetailMainProps) {
             <MemberNickname>{postData?.hostNickname}</MemberNickname>
             <WriterTag>작성자</WriterTag>
           </Member>
-          {postData?.hostMemberNicknames.map((nickname: string) => {
-            if (postData.nickname === nickname) return;
-            return (
-              <Member>
-                <MemberProfile src="/anonymous.png" />
-                <MemberNickname>{nickname}</MemberNickname>
-              </Member>
-            );
-          })}
+          {postData?.hostMemberNicknames.map(
+            (nickname: string, idx: number) => {
+              if (postData.hostNickname === nickname) return;
+              return (
+                <Member key={idx}>
+                  <MemberProfile src="/anonymous.png" />
+                  <MemberNickname>{nickname}</MemberNickname>
+                </Member>
+              );
+            },
+          )}
         </Members>
       </YeoreumInfo>
       <PostButton onClick={() => router.push(href)}>

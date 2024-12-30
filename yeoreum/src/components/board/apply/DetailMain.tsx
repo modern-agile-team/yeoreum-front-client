@@ -10,13 +10,21 @@ interface DetailHeaderProps {
   param: Param;
 }
 
+interface Guest {
+  nickname: string;
+  profileImage: string;
+  userNo: number;
+}
+
 function DetailMain({ param }: DetailHeaderProps) {
   const router = useRouter();
   const { data } = useApplicationDetailQuery(param.postNo, param.applicationNo);
 
   const applicationData = data?.data.response.guestTeam;
 
-  console.log(applicationData);
+  const guestsData = applicationData?.guests;
+
+  console.log(guestsData);
 
   const { mutate } = useCreateChatMutation(param.postNo, param.applicationNo);
 
@@ -29,6 +37,18 @@ function DetailMain({ param }: DetailHeaderProps) {
     <Main>
       <ContentWrapper>
         <Content>{applicationData?.description}</Content>
+        <YeoreumInfo>
+          <Subject>신청 인원</Subject>
+          <Members>
+            {guestsData?.map((guest: Guest, idx: number) => (
+              <Member key={guest.nickname + idx}>
+                <MemberProfile src="/anonymous.png" />
+                <MemberNickname>{guest.nickname}</MemberNickname>
+                {idx === 0 && <WriterTag>작성자</WriterTag>}
+              </Member>
+            ))}
+          </Members>
+        </YeoreumInfo>
       </ContentWrapper>
       <PostButton onClick={btnClickHandler}>수락하기</PostButton>
     </Main>
@@ -50,8 +70,10 @@ const ContentWrapper = styled.p`
 `;
 
 const Content = styled.span`
+  display: flex;
   line-height: 1.6;
   letter-spacing: -1px;
+  margin-bottom: 30px;
 `;
 
 const PostButton = styled.button`
@@ -75,4 +97,55 @@ const PostButton = styled.button`
   @media (max-width: 640px) {
     width: 50%;
   }
+`;
+
+const YeoreumInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+`;
+
+const Subject = styled.div`
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.palette.main};
+  margin-bottom: 20px;
+`;
+
+const Members = styled.ul`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Member = styled.li`
+  display: flex;
+  align-items: center;
+  height: 32px;
+  margin-bottom: 12px;
+`;
+
+const MemberProfile = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: lightgray;
+  margin-right: 6px;
+`;
+
+const MemberNickname = styled.span`
+  letter-spacing: -0.6px;
+`;
+
+const WriterTag = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 24px;
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme.palette.main};
+  font-size: 12px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.palette.main};
+  margin-left: 10px;
 `;

@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React, { useState, useRef } from 'react';
-import { usePostDetailQuery } from '../../../hooks/queries/posts';
+import {
+  useDeletePostMutation,
+  usePostDetailQuery,
+} from '../../../hooks/queries/posts';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { useLoginState } from '../../../store/hooks';
 
@@ -12,6 +16,7 @@ interface PostDetailHeaderProps {
 function PostDetailHeader({ postNo }: PostDetailHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
+  const router = useRouter();
 
   const { userData } = useLoginState();
 
@@ -21,6 +26,15 @@ function PostDetailHeader({ postNo }: PostDetailHeaderProps) {
   const isMyPost = postData?.hostUserNo === userData?.userNo;
 
   useOutsideClick(ref, () => setIsOpen(false));
+
+  const { mutate } = useDeletePostMutation(postNo);
+
+  const handleClickDeleteBtn = () => {
+    const deletePost = confirm('게시글을 삭제하시겠습니까?');
+    if (deletePost) {
+      mutate();
+    }
+  };
 
   return (
     <Header>
@@ -39,25 +53,34 @@ function PostDetailHeader({ postNo }: PostDetailHeaderProps) {
           />
           <NicknameDate>
             <Nickname>{postData?.hostNickname}</Nickname>
-            <PostedAt>2022.10.8</PostedAt>
+            <PostedAt>{postData?.createdDate}</PostedAt>
           </NicknameDate>
         </FlexRowContainer>
-        {isMyPost || (
-          <>
-            <MoreBtn
-              width={24}
-              height={24}
-              src={'/icons/more.svg'}
-              alt="profile"
-              priority
-              onClick={() => setIsOpen(true)}
-            />
-            {isOpen && (
-              <ReportModal ref={ref}>
-                <ReportBtn>게시글 신고하기</ReportBtn>
-              </ReportModal>
+        <MoreBtn
+          width={24}
+          height={24}
+          src={'/icons/more.svg'}
+          alt="profile"
+          priority
+          onClick={() => setIsOpen(true)}
+        />
+        {isOpen && (
+          <ReportModal ref={ref}>
+            {isMyPost ? (
+              <>
+                <ReportBtn
+                  onClick={() => router.push(`/board/post/${postNo}/edit`)}
+                >
+                  게시글 수정하기
+                </ReportBtn>
+                <ReportBtn onClick={handleClickDeleteBtn}>
+                  게시글 삭제하기
+                </ReportBtn>
+              </>
+            ) : (
+              <ReportBtn>게시글 신고하기</ReportBtn>
             )}
-          </>
+          </ReportModal>
         )}
       </PostInfo>
     </Header>
@@ -136,8 +159,9 @@ const MoreBtn = styled(Image)`
 const ReportModal = styled.div`
   background-color: white;
   width: 135px;
-  height: 50px;
+  padding: 5px 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
@@ -149,7 +173,7 @@ const ReportModal = styled.div`
 `;
 
 const ReportBtn = styled.button`
-  width: 135px;
+  width: 100%;
   height: 40px;
   background-color: inherit;
 

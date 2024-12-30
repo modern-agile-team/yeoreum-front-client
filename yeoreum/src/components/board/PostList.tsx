@@ -49,9 +49,13 @@ function PostList({ posts, fetchNextPage, isApplication }: PostListProps) {
           }
         >
           <List ref={posts.length - 1 === idx ? ref : null}>
-            <PostHeader>
-              <Progress status={post.isDone}>
-                {statusMaker(post.isDone)}
+            <PostHeader isApplication={isApplication ? true : false}>
+              <Progress
+                status={isApplication ? post.isAdoptedStatus ?? 2 : post.isDone}
+              >
+                {isApplication
+                  ? statusMaker(post.isAdoptedStatus ?? 2)
+                  : statusMaker(post.isDone)}
               </Progress>
               <CreatedAt>{post.createdDate}</CreatedAt>
             </PostHeader>
@@ -117,10 +121,10 @@ const List = styled.div`
   }
 `;
 
-const PostHeader = styled.div`
+const PostHeader = styled.div<{ isApplication: boolean }>`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: ${({ isApplication }) => (isApplication ? '4px' : '10px')};
 `;
 
 const Progress = styled.p<{ status: PostStatusType }>`

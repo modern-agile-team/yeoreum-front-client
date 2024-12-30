@@ -12,6 +12,8 @@ function DetailHeader({ param }: DetailHeaderProps) {
 
   const applicationData = data?.data.response.guestTeam;
 
+  const createdDate: string = applicationData?.createdDate.substring(0, 10);
+
   return (
     <Header>
       <PostTitle>{applicationData?.title}</PostTitle>
@@ -25,8 +27,8 @@ function DetailHeader({ param }: DetailHeaderProps) {
             priority
           />
           <NicknameDate>
-            <Nickname>{'postData?.hostNickname'}</Nickname>
-            <PostedAt>2022.10.8</PostedAt>
+            <Nickname>{applicationData?.guests?.[0].nickname}</Nickname>
+            <PostedAt>{createdDate}</PostedAt>
           </NicknameDate>
         </FlexRowContainer>
       </PostInfo>

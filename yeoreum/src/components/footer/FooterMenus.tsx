@@ -11,8 +11,8 @@ function FooterMenus({ option }: FooterMenusProps) {
   return (
     <Menu>
       <MenuTitle>{option.title}</MenuTitle>
-      {option.items.map((item: MenuItem) => (
-        <MenuItem>
+      {option.items.map((item: MenuItem, idx: number) => (
+        <MenuItem key={idx}>
           <Link href={item.href}>{item.text}</Link>
         </MenuItem>
       ))}

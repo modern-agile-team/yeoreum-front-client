@@ -1,11 +1,14 @@
+import { PostEditData } from './../../types/post';
 import { PostCreateData, ApplicationCreateData } from '../../types/post';
 import { useInfiniteQuery, useQuery, useMutation } from '@tanstack/react-query';
 import {
+  requestDeletePost,
   RequestGetAllPostsOption,
   requestGetApplicationDetail,
   requestGetPostApplication,
   requestGetPostDetail,
   requestGetPosts,
+  requestPatchEditPost,
   requestPostCreateApplication,
   requestPostCreateChatRoom,
   requestPostCreatePost,
@@ -59,6 +62,34 @@ const useCreatePostMutation = (
   });
 };
 
+const useEditPostMutation = (
+  boardNo: number,
+  body: PostEditData,
+  onSuccess?: OnSuccess,
+  onError?: OnError,
+) => {
+  return useMutation(() => requestPatchEditPost(boardNo, body), {
+    onSuccess,
+    onError,
+  });
+};
+
+const useDeletePostMutation = (boardNo: number) => {
+  const router = useRouter();
+
+  return useMutation(() => requestDeletePost(boardNo), {
+    onSuccess: (data: any) => {
+      console.log('게시글 삭제 성공', data);
+      alert('게시글이 삭제되었습니다.');
+      router.push('/mypage');
+    },
+    onError: (error: any) => {
+      console.log('게시글 삭제 실패', error);
+      alert('알 수 없는 오류가 발생했습니다.');
+    },
+  });
+};
+
 const useCreateApplicationMutation = (
   boardNo: number,
   body: ApplicationCreateData,
@@ -73,6 +104,7 @@ const useCreateApplicationMutation = (
 
 const usePostDetailQuery = (boardNo: number) => {
   // const router = useRouter();
+
   return useQuery(
     ['postDetail', boardNo],
     () => requestGetPostDetail(boardNo),
@@ -90,6 +122,7 @@ const usePostDetailQuery = (boardNo: number) => {
 
 const useApplicationList = (boardNo: number) => {
   // const router = useRouter();
+
   return useQuery(
     ['applicationList', boardNo],
     () => requestGetPostApplication(boardNo),
@@ -109,6 +142,7 @@ const useApplicationList = (boardNo: number) => {
 
 const useApplicationDetailQuery = (boardNo: number, teamNo: number) => {
   // const router = useRouter();
+
   return useQuery(
     ['applicationDetail', boardNo, teamNo],
     () => requestGetApplicationDetail(boardNo, teamNo),
@@ -126,6 +160,7 @@ const useApplicationDetailQuery = (boardNo: number, teamNo: number) => {
 
 const useCreateChatMutation = (boardNo: number, teamNo: number) => {
   const router = useRouter();
+
   return useMutation(() => requestPostCreateChatRoom(boardNo, teamNo), {
     onSuccess: (data: any) => {
       console.log('여름 신청 수락 성공', data);
@@ -153,6 +188,8 @@ const useCreateChatMutation = (boardNo: number, teamNo: number) => {
 export {
   usePostsInfiniteQuery,
   useCreatePostMutation,
+  useEditPostMutation,
+  useDeletePostMutation,
   usePostDetailQuery,
   useCreateApplicationMutation,
   useApplicationList,

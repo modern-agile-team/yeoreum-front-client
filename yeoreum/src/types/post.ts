@@ -7,10 +7,10 @@ export interface PostType {
   location: string;
   meetingTime: string;
   isDone: boolean;
-  male: number;
-  female: number;
-  hostUserNums: number[];
-  hostNicknames: string[];
+  recruitMale: number;
+  recruitFemale: number;
+  hostMemberNums: number[];
+  hostMemberNicknames: string[];
 }
 
 export interface BoardType {
@@ -27,6 +27,15 @@ export interface BoardType {
   recruitFemale: number;
   title: string;
   teamNo?: number;
+  isAdoptedStatus?: 2 | 3 | 4;
+}
+
+export interface ApplicationType {
+  title: string;
+  description: string;
+  guests: number[];
+  isAdoptedStatus: 2 | 3 | 4;
+  teamNo: number;
 }
 
 export interface PostCreateData {
@@ -39,6 +48,16 @@ export interface PostCreateData {
   recruitMale: number;
   recruitFemale: number;
   hostMembers: UserNo[];
+}
+
+export interface PostEditData {
+  [key: string]: any;
+  title: string;
+  description: string;
+  location: string;
+  meetingTime: string;
+  recruitMale: number;
+  recruitFemale: number;
 }
 
 export interface ApplicationCreateData {
